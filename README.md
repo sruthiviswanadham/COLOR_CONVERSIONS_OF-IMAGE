@@ -158,6 +158,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
 Output:
+
 ![image](https://github.com/user-attachments/assets/72457059-fb66-413f-ba40-725faf0de877)
 ![image](https://github.com/user-attachments/assets/876e2bb5-332f-4861-be05-ed295c8f957c)
 ![image](https://github.com/user-attachments/assets/d44e0717-756d-4790-97f2-51cede8719c2)
@@ -202,6 +203,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
 Output:
+
 ![image](https://github.com/user-attachments/assets/d277b78a-3a48-4ad0-8dae-e6a03a61f014)
 ![image](https://github.com/user-attachments/assets/3681bdbe-e9eb-4f1e-979a-ab2a11f75aaf)
 ![image](https://github.com/user-attachments/assets/5e384698-1936-4757-8f21-70e3ac3ca599)
