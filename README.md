@@ -1,244 +1,384 @@
 # COLOR_CONVERSIONS_OF-IMAGE
-## AIM
+## AIM:
 To write a python program using OpenCV to do the following image manipulations.
-
-i) Read, display, and write an image.
-
-ii) Access the rows and columns in an image.
-
-iii) Cut and paste a small portion of the image.
-
-iv)To perform the color conversion between RGB, BGR, HSV, and YCbCr color models.
-
 
 ## Software Required:
 Anaconda - Python 3.7
 ## Algorithm:
-### Step1:
-Choose an image and save it as a filename.jpg ,
-### Step2:
-Use imread(filename, flags) to read the file.
-### Step3:
-Use imshow(window_name, image) to display the image.
-### Step4:
-Use imwrite(filename, image) to write the image.
-### Step5:
-End the program and close the output image windows.
-### Step6:
-Convert BGR and RGB to HSV and GRAY
-### Step7:
-Convert HSV to RGB and BGR
-### Step8:
-Convert RGB and BGR to YCrCb
-### Step9:
-Split and Merge RGB Image
-### Step10:
-Split and merge HSV Image
+```
+1. Read and Display an Image:
 
-##### Program:
-### Developed By: VISWANADHAM VENKATA SAI SRUTHI
-### Register Number: 212223100061
+Load an image from your local directory and display it.
+
+2. Draw Shapes and Add Text:
+
+Draw a line from the top-left to the bottom-right of the image.
+
+Draw a circle at the center of the image.
+
+Draw a rectangle around a specific region of interest in the image.
+
+Add the text "OpenCV Drawing" at the top-left corner of the image.
+
+3. Image Color Conversion:
+
+Convert the image from RGB to HSV and display it.
+
+Convert the image from RGB to GRAY and display it.
+
+Convert the image from RGB to YCrCb and display it.
+
+Convert the HSV image back to RGB and display it.
+
+4. Access and Manipulate Image Pixels:
+
+Resize the original image to half its size and display it.
+
+6. Image Cropping:
+
+Crop a region of interest (ROI) from the image (e.g., a 100x100 pixel area starting at (50, 50)) and display it.
+
+7. Image Flipping:
+
+Flip the original image horizontally and display it.
+
+Flip the original image vertically and display it.
+
+8. Write and Save the Modified Image:
+
+Save the final modified image to your local directory.
+```
+
+# Program:
+```
+Developed By: V Sai Sruthi
+Register Number: 212223100061
+```
 
 
-## Output:
+### 1.) Read and display the image
 
-### i) Read and display the image
+```Python
+import cv2
+image=cv2.imread('Nature.jpg',1)
+cv2.imshow('Image Window', image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+``` 
+ 
+
+### OUTPUT:
+
+![image](https://github.com/user-attachments/assets/6a7a0564-ab27-4bb4-80f3-22c108c18e2c)
+
+ 
+
+### 2.) Draw Shapes and Add Text:
+i)Draw a line from the top-left to the bottom-right of the image.
+
+```Python
+import cv2
+img = cv2.imread("Nature.JPG")
+res = cv2.line(img, (0, 0), (599, 799), (200, 100, 205), 10)
+cv2.imshow('Image Window', res)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
 
 ```
-import cv2
-from google.colab.patches import cv2_imshow 
 
-image=cv2.imread('/content/bird.jpg')
-image=cv2.resize(image,(400,400))
-cv2_imshow(image) 
+
+### OUTPUT:
+
+
+![image](https://github.com/user-attachments/assets/86dee302-a785-4544-b8aa-e4ec3fdf5571)
+
+
+
+ 
+### ii)Draw a circle at the center of the image.
+```Python
+import cv2
+
+# Load the image
+img = cv2.imread("Nature.JPG")
+
+# Get the dimensions of the image
+height, width, _ = img.shape
+
+# Calculate the center of the image
+center_coordinates = (width // 2, height // 2)
+
+# Draw a circle at the center of the image
+res = cv2.circle(img, center_coordinates, 150, (255, 0, 0), 10)
+
+# Display the image with the circle
+cv2.imshow('Image Window', res)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+```
+
+
+### OUTPUT:
+
+![image](https://github.com/user-attachments/assets/7fd7b197-8fdf-4d0f-a345-20d1b322fce8)
+
+
+      
+### iii)Draw a rectangle around a specific region of interest in the image.
+```Python
+import cv2
+
+img = cv2.imread("Nature.JPG")
+start=(0,0)
+stop=(409,529)
+color=(100,255,100)
+thickness=10
+res_img=cv2.rectangle(img,start,stop,color,thickness)
+# Display the HSV image
+cv2.imshow('Image Window', res_img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
-Output:
+ 
 
-![image](https://github.com/user-attachments/assets/8fbe126b-8fe0-4920-a6c1-db2d3b67362b)
+### OUTPUT:
 
-### ii)Write the image
-```
-image=cv2.imread('/content/bird.jpg',0)
-cv2.imwrite("/content/bird.jpg",image)
-```
-Output:
 
-![IMAGE 2](https://github.com/user-attachments/assets/9dbd57da-f0f2-40c0-b6ae-f0a1947a1d81)
+![image](https://github.com/user-attachments/assets/64b1e5b8-bc68-4a5a-8f92-3619d9ae807b)
 
-### iii)Shape of the Image
-```
+      
+### iv)Add the text "OpenCV Drawing" at the top-left corner of the image.
+
+ ```Python
 import cv2
-image=cv2.imread('/content/bird.jpg',1)
-print(image.shape)
-```
-Output:
 
-![IMAGE 3](https://github.com/user-attachments/assets/b666d04e-69e9-426b-b5a7-00ed497d46a6)
+# Load the image
+img = cv2.imread("Nature.JPG")
 
-### iv)Access rows and columns
-```
-import random
-import cv2
-from google.colab.patches import cv2_imshow # Import the correct function for Colab
+# Define the text to be added and its position
+text = "OPENCV DRAWING"
+position = (50, 50)  # Positioning the text at the top-left corner
 
-image=cv2.imread('/content/bird.jpg',1)
-image=cv2.resize(image,(400,400))
-for i in range (150,200):
-  for j in range(image.shape[1]):
-      image[i][j]=[random.randint(0,255),
-                   random.randint(0,255),
-                   random.randint(0,255)] 
-cv2_imshow(image) 
+# Set the font, scale, color, and thickness of the text
+font = cv2.FONT_HERSHEY_SIMPLEX
+font_scale = 1
+color = (255, 255, 255)  # White color
+thickness = 2
+
+# Add the text to the image
+res = cv2.putText(img, text, position, font, font_scale, color, thickness, cv2.LINE_AA)
+
+# Display the image with the text
+cv2.imshow('Image Window', res)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-```
-Output:
 
-![image](https://github.com/user-attachments/assets/7a977484-0284-4857-857e-52bbf36df407)
-
-### v)Cut and paste portion of image
 ```
+
+    
+### OUTPUT:
+
+![image](https://github.com/user-attachments/assets/b6b5a4ca-7d57-40fa-9a64-ae4fb490b61b)
+
+
+
+### 3.)Image Color Conversion:
+i)Convert the image from RGB to HSV and display it.
+```Python
 import cv2
-from google.colab.patches import cv2_imshow  # Use cv2_imshow for Colab
-
-image = cv2.imread('/content/bird.jpg', 1)
-image = cv2.resize(image, (400, 400))
-tag = image[130:200, 110:190]
-image[110:180, 120:200] = tag
-cv2_imshow(image)  # Replace cv2.imshow with cv2_imshow
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-```
-Output:
-
-![image](https://github.com/user-attachments/assets/8b086fdd-baf8-451f-aec4-a68a268445ff)
-
-### vi) BGR and RGB to HSV and GRAY
-```
-import cv2
-from google.colab.patches import cv2_imshow  # Import cv2_imshow
-
-img = cv2.imread('/content/bird.jpg',1)
-img = cv2.resize(img,(300,300))
-cv2_imshow(img) 
-hsv1 = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
-cv2_imshow(hsv1)  
+img = cv2.imread('Nature.jpg',1)
+img = cv2.resize(img,(300,200))
+cv2.imshow('Original Image',img)
 hsv2 = cv2.cvtColor(img,cv2.COLOR_RGB2HSV)
-cv2_imshow(hsv2)  
-gray1 = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-cv2_imshow(gray1)  
+cv2.imshow('RGB2HSV',hsv2)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+
+### OUTPUT:
+
+![image](https://github.com/user-attachments/assets/d43da3bc-0aa4-4d35-9af0-cf12e4ca8e20)
+
+#### ii.)Convert the image from RGB to GRAY and display it.
+```Python
+import cv2
+img = cv2.imread('Nature.jpg',1)
+img = cv2.resize(img,(300,200))
+cv2.imshow('Original Image',img)
 gray2 = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
-cv2_imshow(gray2) 
+cv2.imshow('RGB2GRAY',gray2)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
-Output:
 
-![image](https://github.com/user-attachments/assets/591450b4-f356-4fbf-b47b-1220c7d19263)
-![image](https://github.com/user-attachments/assets/4be0d721-c1e8-4001-9c27-7feeb500ca63)
-![image](https://github.com/user-attachments/assets/2842fc9a-a370-4b40-afd8-7cff120af36a)
-![image](https://github.com/user-attachments/assets/c0e89efd-9305-440e-8f6a-e58ba8844563)
-![image](https://github.com/user-attachments/assets/7e5be429-5b75-4733-8a09-2f56aff4fb3f)
+### Output:
 
-### vii) HSV to RGB and BGR
-```
+![image](https://github.com/user-attachments/assets/3f5aadb1-c0a2-4262-87ff-cbb90da3ef1a)
+
+#### iii.)Convert the image from RGB to YCrCb and display it.
+```Python
 import cv2
-from google.colab.patches import cv2_imshow  # Import cv2_imshow for Colab 
-img = cv2.imread('/content/bird.jpg')
+img = cv2.imread('Nature.jpg',1)
 img = cv2.resize(img,(300,200))
-img = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
-cv2_imshow(img) # Use cv2_imshow instead of cv2.imshow
-RGB = cv2.cvtColor(img,cv2.COLOR_HSV2RGB)
-cv2_imshow(RGB) # Use cv2_imshow instead of cv2.imshow
-BGR = cv2.cvtColor(img,cv2.COLOR_HSV2BGR)
-cv2_imshow(BGR) # Use cv2_imshow instead of cv2.imshow
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-```
-Output:
-
-![image](https://github.com/user-attachments/assets/72457059-fb66-413f-ba40-725faf0de877)
-![image](https://github.com/user-attachments/assets/876e2bb5-332f-4861-be05-ed295c8f957c)
-![image](https://github.com/user-attachments/assets/d44e0717-756d-4790-97f2-51cede8719c2)
-
-### viii) RGB and BGR to YCrCb
-```
-import cv2
-from google.colab.patches import cv2_imshow  # Import the Colab-compatible display function
-
-img = cv2.imread('/content/bird.jpg')
-img = cv2.resize(img,(300,300))
-cv2_imshow(img)  # Use cv2_imshow to display the image in Colab
+cv2.imshow('Original Image',img)
 YCrCb1 = cv2.cvtColor(img, cv2.COLOR_BGR2YCrCb)
-cv2_imshow(YCrCb1)  # Use cv2_imshow here as well
-YCrCb2 = cv2.cvtColor(img, cv2.COLOR_RGB2YCrCb)
-cv2_imshow(YCrCb2)  # And here
+cv2.imshow('RGB-2-YCrCb',YCrCb1)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-```
-Output:
 
-![image](https://github.com/user-attachments/assets/b2f1c8c3-1b27-417a-a890-e52288041a22)
-![image](https://github.com/user-attachments/assets/a0a57d3f-413f-4403-bd7f-0e3a0841bdfd)
-![image](https://github.com/user-attachments/assets/e82dc687-fcce-44ff-a268-ac7f040d146b)
-
-### ix) Split and merge RGB Image
 ```
+### Output:
+
+![image](https://github.com/user-attachments/assets/35d703be-2f53-421d-b684-34ac092e486a)
+
+
+
+#### iv.)Convert the HSV image back to RGB and display it.
+```Python
 import cv2
-from google.colab.patches import cv2_imshow  # Import cv2_imshow for Colab compatibility
-
-img = cv2.imread('/content/bird.jpg',1)
+img = cv2.imread('Nature.jpg',1)
 img = cv2.resize(img,(300,200))
-R = img[:,:,2]
-G = img[:,:,1]
-B = img[:,:,0]
-cv2_imshow(R)  # Use cv2_imshow instead of cv2.imshow
-cv2_imshow(G)  # Use cv2_imshow instead of cv2.imshow
-cv2_imshow(B)  # Use cv2_imshow instead of cv2.imshow
-merged = cv2.merge((B,G,R))
-cv2_imshow(merged)  # Use cv2_imshow instead of cv2.imshow
+cv2.imshow('Original Image',img)
+BGR = cv2.cvtColor(img,cv2.COLOR_HSV2BGR)
+cv2.imshow('HSV2RGB',BGR)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
-Output:
+### Output:
 
-![image](https://github.com/user-attachments/assets/d277b78a-3a48-4ad0-8dae-e6a03a61f014)
-![image](https://github.com/user-attachments/assets/3681bdbe-e9eb-4f1e-979a-ab2a11f75aaf)
-![image](https://github.com/user-attachments/assets/5e384698-1936-4757-8f21-70e3ac3ca599)
-![image](https://github.com/user-attachments/assets/9c16f196-66cd-41be-90d6-fc6b01f8454b)
+![image](https://github.com/user-attachments/assets/54a90a9a-14b0-4bd0-b3a2-7510b99bebf2)
 
-### x) Split and merge HSV Image
-```
+
+## 4. Access and Manipulate Image Pixels:
+```Python
 import cv2
-from google.colab.patches import cv2_imshow  # Import cv2_imshow for Colab compatibility
 
-img = cv2.imread("/content/bird.jpg",1)
-img = cv2.resize(img,(300,200))
-img=cv2.cvtColor(img,cv2.COLOR_RGB2HSV)
-H,S,V=cv2.split(img)
-cv2_imshow(H) # Use cv2_imshow instead of cv2.imshow
-cv2_imshow(S) # Use cv2_imshow instead of cv2.imshow
-cv2_imshow(V) # Use cv2_imshow instead of cv2.imshow
-merged = cv2.merge((H,S,V))
-cv2_imshow(merged) # Use cv2_imshow instead of cv2.imshow
+# Load and resize the image
+img = cv2.imread('Nature.jpg', 1)
+img = cv2.resize(img, (300, 200))
+
+# Show the original image
+cv2.imshow('Original Image', img)
+
+# 1. Access and print the value of the pixel at coordinates (100, 100)
+pixel_value = img[100, 100]
+print(f"Pixel value at (100, 100): {pixel_value}")
+
+# 2. Modify the color of the pixel at (199, 199) to white
+img[199, 199] = [255, 255, 255]  # Setting the pixel value to white (BGR)
+
+# Display the modified image
+cv2.imshow('Modified Image', img)
+
+# Wait for a key press and close the windows
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+```
+### Output:
+
+![image](https://github.com/user-attachments/assets/f0c9a034-e441-4e6d-8a46-f15cc94b0fbd)
+
+
+
+![image](https://github.com/user-attachments/assets/fe8bf36b-3d98-426c-838a-e7c8eb2f8956)
+
+
+## 5. Image Resizing:
+```Python
+width=600
+height=800
+half_width=300
+half_height=400
+resized_img = cv2.resize(image, (300, 400))
+cv2.imshow('Original',image)
+cv2.imshow('resized',resized_img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+```
+### Output:
+
+![image](https://github.com/user-attachments/assets/4da275ad-195c-4819-87a7-d87f45895d2e)
+
+
+## 6.Image Cropping:
+```Python
+import cv2
+
+# Load the image
+image1=cv2.imread('Nature.jpg',1)
+
+# Define the starting point and size of the ROI
+x, y = 50, 50
+width, height = 100, 100
+
+# Crop the ROI
+roi = image1[y:y + height, x:x + width]
+
+# Display the cropped ROI
+cv2.imshow('Cropped Image', roi)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
-Output:
+### Output:
 
-![image](https://github.com/user-attachments/assets/4b12dd5e-3b29-466f-b5e2-e1a7380e74d1)
-![image](https://github.com/user-attachments/assets/2e0684db-8f00-46e6-a3f3-1d7a6ed47932)
-![image](https://github.com/user-attachments/assets/56784074-350a-447d-9f81-249063f228fb)
-![image](https://github.com/user-attachments/assets/88208be9-3c29-4490-a076-32ed0ba17b67)
+![image](https://github.com/user-attachments/assets/dec33c34-40e2-4f21-9678-685c396c17d4)
+
+
+
+## 7.Image Flipping:
+i.)Flip the original image horizontally and display it.
+```Python
+
+import cv2
+img = cv2.imread("Nature.JPG")
+img = cv2.resize(img,(300,200))
+res=cv2.rotate(img,cv2.ROTATE_180)
+cv2.imshow('Original',img)
+cv2.imshow('Image Window', res)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+### Output:
+
+![image](https://github.com/user-attachments/assets/cc37f630-8467-4301-982e-75185932e749)
+
+
+#### ii.)Flip the original image vertically and display it.
+
+```Python
+import cv2
+
+img = cv2.imread("Nature.JPG")
+img = cv2.resize(img,(300,200))
+res=cv2.rotate(img,cv2.ROTATE_90_CLOCKWISE)
+# Display the HSV image
+cv2.imshow('Original',img)
+cv2.imshow('Image Window', res)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+```
+### Output:
+
+![image](https://github.com/user-attachments/assets/e68dbc43-1de2-4d8d-ad56-b92f849174dc)
+
+## 8. Write and Save the Modified Image:
+```Python
+import cv2
+img = cv2.imread("Nature.JPG")
+img = cv2.resize(img,(300,200))
+cv2.imwrite('sunny1.jpg',img)
+```
+### Output:
+
+![image](https://github.com/user-attachments/assets/000373d1-ee42-4a7d-995f-aaf41788b036)
+
 
 ## Result:
 Thus the images are read, displayed, and written ,and color conversion was performed between RGB, HSV and YCbCr color models successfully using the python program.
-
-
-
-
-
 
 
